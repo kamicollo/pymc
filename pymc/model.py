@@ -1377,10 +1377,11 @@ class Model(WithMemoization, metaclass=ContextMeta):
         """
         name = rv_var.name
         data = convert_observed_data(data).astype(rv_var.dtype)
-
         if data.ndim != rv_var.ndim:
             raise ShapeError(
-                "Dimensionality of data and RV don't match.", actual=data.ndim, expected=rv_var.ndim
+                f"RV '{rv_var}': dimensionality of data does not match RV.",
+                actual=data.ndim,
+                expected=rv_var.ndim,
             )
 
         if pytensor.config.compute_test_value != "off":

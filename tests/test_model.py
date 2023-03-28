@@ -539,7 +539,9 @@ def test_make_obs_var():
         fake_distribution.name = input_name
 
     # The function requires data and RV dimensionality to be compatible
-    with pytest.raises(ShapeError, match="Dimensionality of data and RV don't match."):
+    with pytest.raises(
+        ShapeError, match=f"RV '{input_name}': dimensionality of data does not match RV."
+    ):
         fake_model.make_obs_var(fake_distribution, np.ones((3, 3, 1)), None, None, None)
 
     # Check function behavior using the various inputs
